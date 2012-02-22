@@ -57,6 +57,19 @@
 	[base release];
 }
 
+- (void) addToMainWindow
+{
+	UIWindow* window = [UIApplication sharedApplication].keyWindow;
+	if (!window) {
+		window = [[UIApplication sharedApplication].windows objectAtIndex:0];
+	}
+	[window addSubview:self.view];
+}
+- (void) removeFromMainWindow
+{
+	[self.view removeFromSuperview];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
@@ -274,6 +287,7 @@
 	center = CGPointZero;
 	blockTouches = NO;
 	allowSuperviewInteraction = NO;
+
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {

@@ -82,6 +82,8 @@ typedef enum {
 + (NSString *)buildInfo;
 
 - (id)initWithDelegate:(id)hudDelegate;
+- (void) removeFromMainWindow;
+- (void) addToMainWindow;
 
 - (void)setCaption:(NSString *)caption;
 - (void)setImage:(UIImage *)image;
