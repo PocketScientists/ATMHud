@@ -45,6 +45,15 @@
 	return self;
 }
 
+- (id)initWithView:(UIView*)view delegate:(id)hudDelegate {
+	if ((self = [self initWithDelegate:hudDelegate])) {
+		delegate = hudDelegate;
+		[self construct];
+		[view addSubview:self.view];
+	}
+	return self;
+}
+
 - (void)loadView {
 	UIView *base = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	base.backgroundColor = [UIColor clearColor];
@@ -65,10 +74,18 @@
 	}
 	[window addSubview:self.view];
 }
-- (void) removeFromMainWindow
+- (void) removeFromView
 {
 	[self.view removeFromSuperview];
 }
+
+- (void)showWithStatus:(NSString*)status
+{
+	[self setCaption:status];
+	[self setActivity:YES];
+	[self show];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -248,20 +265,56 @@
 
 #pragma mark -
 #pragma mark Controlling
-- (void)show {
+- (void)show
+{
+	NSAssert([NSThread currentThread] == [NSThread mainThread], @"only execute this from the main thread");
+
 	[__view show];
 }
 
-- (void)update {
+- (void)update
+{
+	NSAssert([NSThread currentThread] == [NSThread mainThread], @"only execute this from the main thread");
+
 	[__view update];
 }
 
-- (void)hide {
-	[__view hide];
+- (void)hide
+{
+	NSAssert([NSThread currentThread] == [NSThread mainThread], @"only execute this from the main thread");
+
+	[self hide:YES];
 }
+
+- (void)hide:(BOOL)animated
+{
+	NSAssert([NSThread currentThread] == [NSThread mainThread], @"only execute this from the main thread");
+
+	[__view hide:animated];
+}
+
 
 - (void)hideAfter:(NSTimeInterval)delay {
 	[self performSelector:@selector(hide) withObject:nil afterDelay:delay];
+}
+
+
+- (void)hideWithSuccess:(NSString*)successString afterDelay:(NSTimeInterval)seconds
+{
+	[self setCaption:successString];
+	[self setActivity:NO];
+	[self setImage:[UIImage imageNamed:@"19-check"]];
+	[self update];
+	[self hideAfter:seconds];
+}
+
+- (void)hideWithError:(NSString*)errorString afterDelay:(NSTimeInterval)seconds
+{
+	[self setCaption:errorString];
+	[self setActivity:NO];
+	[self setImage:[UIImage imageNamed:@"11-x.png"]];
+	[self update];
+	[self hideAfter:seconds];
 }
 
 #pragma mark -

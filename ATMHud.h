@@ -82,7 +82,9 @@ typedef enum {
 + (NSString *)buildInfo;
 
 - (id)initWithDelegate:(id)hudDelegate;
-- (void) removeFromMainWindow;
+- (id)initWithView:(UIView*)view delegate:(id)hudDelegate;
+
+- (void) removeFromView;
 - (void) addToMainWindow;
 
 - (void)setCaption:(NSString *)caption;
@@ -99,10 +101,18 @@ typedef enum {
 - (void)showNextInQueue;
 - (void)showQueueAtIndex:(NSInteger)index;
 
+- (void)showWithStatus:(NSString*)status;
+
 - (void)show;
 - (void)update;
 - (void)hide;
 - (void)hideAfter:(NSTimeInterval)delay;
+- (void)hide:(BOOL)animate;
+- (void)hideWithError:(NSString*)errorString;
+- (void)hideWithSuccess:(NSString*)successString;
+- (void)hideWithError:(NSString*)errorString afterDelay:(NSTimeInterval)seconds;
+- (void)hideWithSuccess:(NSString*)successString afterDelay:(NSTimeInterval)seconds;
+
 
 - (void)playSound:(NSString *)soundPath;
 

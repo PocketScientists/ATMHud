@@ -79,6 +79,6 @@ typedef enum {
 - (void)show;
 - (void)reset;
 - (void)update;
-- (void)hide;
+- (void)hide:(BOOL)animated;
 
 @end

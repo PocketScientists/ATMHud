@@ -532,8 +532,28 @@
 	[self applyWithMode:ATMHudApplyModeShow];
 }
 
-- (void)hide {
-	[self applyWithMode:ATMHudApplyModeHide];
+- (void)hide:(BOOL)animated
+{
+	if (animated)
+	{
+		[self applyWithMode:ATMHudApplyModeHide];
+	}
+	else
+	{
+		if ([(id)p.delegate respondsToSelector:@selector(hudWillDisappear:)]) {
+			[p.delegate hudWillDisappear:p];
+		}
+		if (![p.hideSound isEqualToString:@""] && p.hideSound != NULL) {
+			[p playSound:p.hideSound];
+		}
+		
+		self.superview.userInteractionEnabled = NO;
+		self.transform = CGAffineTransformMakeScale(1.0, 1.0);
+		[self reset];
+		if ([(id)p.delegate respondsToSelector:@selector(hudDidDisappear:)]) {
+			[p.delegate hudDidDisappear:p];
+		} 
+	}
 }
 
 - (void)update {
