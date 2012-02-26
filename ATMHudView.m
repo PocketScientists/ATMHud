@@ -547,6 +547,7 @@
 			[p playSound:p.hideSound];
 		}
 		
+		self.alpha = 0.0;
 		self.superview.userInteractionEnabled = NO;
 		self.transform = CGAffineTransformMakeScale(1.0, 1.0);
 		[self reset];
