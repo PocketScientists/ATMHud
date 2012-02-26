@@ -298,6 +298,15 @@
 	[self performSelector:@selector(hide) withObject:nil afterDelay:delay];
 }
 
+- (void) hideWithError:(NSString *)errorString
+{
+    [self hideWithError:errorString afterDelay:2];
+}
+
+- (void) hideWithSuccess:(NSString *)successString
+{
+    [self hideWithSuccess:successString afterDelay:2];
+}
 
 - (void)hideWithSuccess:(NSString*)successString afterDelay:(NSTimeInterval)seconds
 {
