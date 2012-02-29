@@ -86,6 +86,12 @@
 	[self show];
 }
 
+- (void)showWithSuccess:(NSString*)success
+{
+    [self show];
+    [self hideWithSuccess:success];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

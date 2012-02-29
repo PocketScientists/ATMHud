@@ -103,6 +103,7 @@ typedef enum {
 
 - (void)showWithStatus:(NSString*)status;
 
+- (void)showWithSuccess:(NSString*)success;
 - (void)show;
 - (void)update;
 - (void)hide;
