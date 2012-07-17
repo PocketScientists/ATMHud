@@ -105,6 +105,7 @@ typedef enum {
 
 - (void)showWithSuccess:(NSString*)success;
 - (void)show;
+- (void) apply;
 - (void)update;
 - (void)hide;
 - (void)hideAfter:(NSTimeInterval)delay;

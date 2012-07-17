@@ -278,6 +278,11 @@
 	[__view show];
 }
 
+- (void) apply
+{
+    [__view applyWithMode:ATMHudApplyModeUpdate];
+}
+
 - (void)update
 {
 	NSAssert([NSThread currentThread] == [NSThread mainThread], @"only execute this from the main thread");
