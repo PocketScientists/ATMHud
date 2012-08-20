@@ -500,6 +500,7 @@
 		}
 			
 		case ATMHudApplyModeHide: {
+            self.superview.userInteractionEnabled = NO;         // prevent from blocking touches
 			if ([(id)p.delegate respondsToSelector:@selector(hudWillDisappear:)]) {
 				[p.delegate hudWillDisappear:p];
 			}

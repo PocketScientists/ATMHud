@@ -293,8 +293,16 @@
 - (void)hide
 {
 	NSAssert([NSThread currentThread] == [NSThread mainThread], @"only execute this from the main thread");
-
-	[self hide:YES];
+    
+    // only animate hiding if view is visible. otherwise seems to cause problems (view not fully hidden)
+    if (self.isViewLoaded && self.view.window)
+    {
+        [self hide:YES];
+    }
+    else
+    {
+        [self hide:NO];
+    }
 }
 
 - (void)hide:(BOOL)animated
