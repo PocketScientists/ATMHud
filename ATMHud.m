@@ -56,9 +56,9 @@
 
 - (void)loadView {
 	UIView *base = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    LogRect(base.frame);
 	base.backgroundColor = [UIColor clearColor];
-	base.autoresizingMask = (UIViewAutoresizingFlexibleWidth |
-							 UIViewAutoresizingFlexibleHeight);
+	base.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
 	base.userInteractionEnabled = NO;
 	[base addSubview:__view];
 	
