@@ -531,6 +531,9 @@
 - (void)show {
 	[self calculate];
 	[self applyWithMode:ATMHudApplyModeShow];
+    
+    // PD addition. make sure it bloody well stays on top
+    [self.superview.superview bringSubviewToFront:self.superview];
 }
 
 - (void)hide:(BOOL)animated
