@@ -96,6 +96,11 @@
     [super viewDidLoad];
 }
 
+- (BOOL) shouldAutorotate
+{
+    return YES;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return YES;
 }
@@ -272,8 +277,11 @@
 #pragma mark Controlling
 - (void)show
 {
+    // PD modification. ref: https://github.com/atomton/ATMHud/issues/12
 	NSAssert([NSThread currentThread] == [NSThread mainThread], @"only execute this from the main thread");
-
+    UIView *sv = [self.view superview];
+    self.view.center = CGPointMake(sv.bounds.origin.x + sv.bounds.size.width/2, sv.bounds.origin.y + sv.bounds.size.height/2);
+    //
 	[__view show];
 }
 
@@ -387,6 +395,14 @@
 - (void)playSound:(NSString *)soundPath {
 	sound = [[ATMSoundFX alloc] initWithContentsOfFile:soundPath];
 	[sound play];
+}
+
+// PD modification. ref: https://github.com/atomton/ATMHud/issues/12
+- (void)setCenter:(CGPoint)pt
+{
+    center = pt;
+    
+    if(__view) __view.center = center;
 }
 
 @end
