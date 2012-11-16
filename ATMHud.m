@@ -29,10 +29,12 @@
 @synthesize shadowEnabled, blockTouches, allowSuperviewInteraction;
 @synthesize showSound, updateSound, hideSound;
 @synthesize __view, sound, displayQueue, queuePosition;
+@synthesize view;
 
 - (id)init {
 	if ((self = [super init])) {
 		[self construct];
+        [self loadView];
 	}
 	return self;
 }
@@ -41,15 +43,16 @@
 	if ((self = [super init])) {
 		delegate = hudDelegate;
 		[self construct];
+        [self loadView];
 	}
 	return self;
 }
 
-- (id)initWithView:(UIView*)view delegate:(id)hudDelegate {
+- (id)initWithView:(UIView*)m_view delegate:(id)hudDelegate {
 	if ((self = [self initWithDelegate:hudDelegate])) {
 		delegate = hudDelegate;
 		[self construct];
-		[view addSubview:self.view];
+		[m_view addSubview:self.view];
 	}
 	return self;
 }
@@ -58,6 +61,7 @@
 	UIView *base = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	base.backgroundColor = [UIColor clearColor];
 	base.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
+    base.autoresizesSubviews = YES;
 	base.userInteractionEnabled = NO;
 	[base addSubview:__view];
 	
@@ -89,28 +93,6 @@
 {
     [self show];
     [self hideWithSuccess:success];
-}
-
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
-- (BOOL) shouldAutorotate
-{
-    return YES;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return YES;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
 }
 
 - (void)dealloc {
@@ -301,15 +283,17 @@
 {
 	NSAssert([NSThread currentThread] == [NSThread mainThread], @"only execute this from the main thread");
     
-    // only animate hiding if view is visible. otherwise seems to cause problems (view not fully hidden)
-    if (self.isViewLoaded && self.view.window)
-    {
-        [self hide:YES];
-    }
-    else
-    {
-        [self hide:NO];
-    }
+//    // only animate hiding if view is visible. otherwise seems to cause problems (view not fully hidden)
+//    if (self.isViewLoaded && self.view.window)
+//    {
+//        [self hide:YES];
+//    }
+//    else
+//    {
+//        [self hide:NO];
+//    }
+    
+    [self hide:YES];
 }
 
 - (void)hide:(BOOL)animated

@@ -20,7 +20,7 @@ typedef enum {
 	ATMHudAccessoryPositionLeft
 } ATMHudAccessoryPosition;
 
-@interface ATMHud : UIViewController {
+@interface ATMHud : NSObject {
 	CGFloat margin;
 	CGFloat padding;
 	CGFloat alpha;
@@ -70,6 +70,7 @@ typedef enum {
 @property (nonatomic, retain) NSString *showSound;
 @property (nonatomic, retain) NSString *updateSound;
 @property (nonatomic, retain) NSString *hideSound;
+@property (nonatomic, retain) UIView* view;
 
 @property (nonatomic, assign) id <ATMHudDelegate> delegate;
 @property (nonatomic, assign) ATMHudAccessoryPosition accessoryPosition;
