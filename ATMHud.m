@@ -67,11 +67,12 @@
 
 - (void) addToMainWindow
 {
+    [self removeFromView];
 	UIWindow* window = [UIApplication sharedApplication].keyWindow;
 	if (!window) {
 		window = [[UIApplication sharedApplication].windows objectAtIndex:0];
 	}
-	[window addSubview:self.view];
+	[window.rootViewController.view addSubview:self.view];
 }
 - (void) removeFromView
 {
@@ -83,6 +84,7 @@
 	[self setCaption:status];
 	[self setActivity:YES];
 	[self show];
+    LogRect(__view.frame);
 }
 
 - (void)showWithSuccess:(NSString*)success
