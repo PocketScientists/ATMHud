@@ -84,7 +84,7 @@
 	[self setCaption:status];
 	[self setActivity:YES];
 	[self show];
-    LogRect(__view.frame);
+    //LogRect(__view.frame);
 }
 
 - (void)showWithSuccess:(NSString*)success
