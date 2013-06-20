@@ -68,12 +68,14 @@
 - (void) addToMainWindow
 {
     [self removeFromView];
-	UIWindow* window = [UIApplication sharedApplication].keyWindow;
-	if (!window) {
-		window = [[UIApplication sharedApplication].windows objectAtIndex:0];
-	}
+    UIWindow* window = nil;
+    if ([UIApplication sharedApplication].windows.count > 0)
+    {
+        window = [[UIApplication sharedApplication].windows objectAtIndex:0];
+    }
 	[window.rootViewController.view addSubview:self.view];
 }
+
 - (void) removeFromView
 {
 	[self.view removeFromSuperview];
