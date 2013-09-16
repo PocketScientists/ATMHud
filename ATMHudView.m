@@ -514,14 +514,13 @@
 								 self.transform = CGAffineTransformMakeScale(p.disappearScaleFactor, p.disappearScaleFactor);
 							 } 
 							 completion:^(BOOL finished){
-								 if (finished) {
+                                     self.alpha = 0.0;
 									 self.superview.userInteractionEnabled = NO;
 									 self.transform = CGAffineTransformMakeScale(1.0, 1.0);
 									 [self reset];
 									 if ([(id)p.delegate respondsToSelector:@selector(hudDidDisappear:)]) {
 										 [p.delegate hudDidDisappear:p];
 									 } 
-								 }
 							 }];
 			break;
 		}
