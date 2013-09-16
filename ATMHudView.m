@@ -381,6 +381,10 @@
 				}
 				
 				self.transform = CGAffineTransformMakeScale(p.appearScaleFactor, p.appearScaleFactor);
+                
+                if (!p.allowSuperviewInteraction) {
+                    self.superview.userInteractionEnabled = YES;
+                }
 
 				[UIView animateWithDuration:.1 
 								 animations:^{
@@ -389,9 +393,6 @@
 								 } 
 								 completion:^(BOOL finished){
 									if (finished) {
-										if (!p.allowSuperviewInteraction) {
-											self.superview.userInteractionEnabled = YES;
-										}
 										if (![p.showSound isEqualToString:@""] && p.showSound != NULL) {
 											[p playSound:p.showSound];
 										}
