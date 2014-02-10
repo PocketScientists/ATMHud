@@ -32,15 +32,21 @@
 - (void)drawInContext:(CGContextRef)ctx {
 	UIGraphicsPushContext(ctx);
 	
-	CGRect f = self.bounds;
-	CGRect s = f;
-	s.origin.y -= 1;
+	CGRect textRect = self.bounds;
+	textRect.size.height += 1; // wd 2014-02-10: without this, the second line of text is truncated on iOS 7
+	
+	CGRect shadowRect = textRect;
+	shadowRect.origin.y -= 1;
+
+	// wd debug code
+	//[[UIColor redColor] set];
+	//UIRectFill(textRect);
 	
 	[[UIColor blackColor] set];
-	[caption drawInRect:f withFont:[UIFont boldSystemFontOfSize:14] lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentCenter];
+	[caption drawInRect:textRect withFont:[UIFont boldSystemFontOfSize:14] lineBreakMode:NSLineBreakByWordWrapping alignment:NSTextAlignmentCenter];
 	
 	[[UIColor whiteColor] set];
-	[caption drawInRect:s withFont:[UIFont boldSystemFontOfSize:14] lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentCenter];
+	[caption drawInRect:shadowRect withFont:[UIFont boldSystemFontOfSize:14] lineBreakMode:NSLineBreakByWordWrapping alignment:NSTextAlignmentCenter];
 	
 	UIGraphicsPopContext();
 }
